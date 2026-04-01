@@ -13,3 +13,5 @@ this is a normal terraform file to create a new ec2 instance with following conf
     - capacity: 8GB
     - type: gp3
     - tenency: default
+* file also run the commands given by user
+* file also produces an output that is ip, dns and private ip of instance
