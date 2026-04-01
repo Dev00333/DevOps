@@ -50,11 +50,12 @@ resource aws_security_group my_security_group {
 resource "aws_instance" "my_instance" {
     key_name = aws_key_pair.my_key.key_name
     vpc_security_group_ids = [aws_security_group.my_security_group.id]
-    instance_type = "t3.micro"
-    ami = "ami-080254318c2d8932f"
+    instance_type = var.aws_instance_type
+    ami = var.ec2_ami
+    user_data = file("install_nginx.sh")
     root_block_device {
-      volume_size = 8
-      volume_type = "gp3"
+      volume_size = var.aws_root_storage_size
+      volume_type = var.aws_root_storage_type
     }
     tags = {
         Name = "tf-instance"
