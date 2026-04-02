@@ -1,12 +1,10 @@
 #!/bin/bash
 
-sudo apt update
-sudo apt install -y nginx docker.io
-sudo systemctl start nginx
-sudo systemctl enable nginx
+sudo apt update && sudo apt full-upgrade -y
+sudo apt install -y docker.io net-tools speedtest-cli docker-compose
+# sudo systemctl start nginx
+# sudo systemctl enable nginx
 sudo systemctl start docker
 sudo systemctl enable docker
-sudo apt install -y docker-compose
 sudo usermod -aG docker $USER
-sudo apt full-upgrade -y
-echo "Nginx and Docker have been installed and started successfully."
+cd /home/ubuntu && wget https://nginx.org/download/nginx-1.29.7.tar.gz && tar -xzvf nginx-1.29.7.tar.gz
