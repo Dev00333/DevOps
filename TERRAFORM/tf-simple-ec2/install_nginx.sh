@@ -2,7 +2,9 @@
 
 sudo apt-get update
 sudo apt full-upgrade -y
-sudo apt-get install nginx -y
-sudo start nginx
+sudo apt-get install nginx docker.io docker-compose-v2 -y
+sudo systemctl start nginx
 sudo systemctl enable nginx
-echo "<h1>Nginx installed successfully</h1>" | sudo tee /var/www/html/index.html
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo adduser ubuntu docker
