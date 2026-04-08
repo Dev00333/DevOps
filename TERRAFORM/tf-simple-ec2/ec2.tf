@@ -3,14 +3,13 @@ resource aws_key_pair my_key {
   public_key = file("terra-key-ec2.pub")
 }
 
-resource aws_default_vpc default {
-    
+resource "aws_default_vpc" "default" {
 }
 
 resource aws_security_group my_security_group {
     name = "new-sg"
     description = "this will add a teraform generated gecurity group"
-    vpc_id = aws_default_vpc.default.id #this is interpolation : it is a way in which we can inherit or extract values from other resources"
+    vpc_id = aws_default_vpc.default.id
     tags = {
         name = "my_security_group"
     }
@@ -48,8 +47,9 @@ resource aws_security_group my_security_group {
 }
 
 resource "aws_instance" "my_instance" {
+    count = var.aws_instance_count
     key_name = aws_key_pair.my_key.key_name
-    vpc_security_group_ids = [aws_security_group.my_security_group.id]
+    vpc_security_group_ids = [ aws_security_group.my_security_group.name ]
     instance_type = var.aws_instance_type
     ami = var.ec2_ami
     user_data = file("install_nginx.sh")

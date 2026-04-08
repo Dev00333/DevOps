@@ -14,3 +14,7 @@ variable "aws_root_storage_type" {
     default = "gp3"
     type = string
 }
+variable "aws_instance_count" {
+  default = 2
+  type = number
+}
