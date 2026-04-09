@@ -47,17 +47,22 @@ resource aws_security_group my_security_group {
 }
 
 resource "aws_instance" "my_instance" {
-    count = var.aws_instance_count
+    for_each = tomap({
+        micro_instance = "t3.micro",
+        small_instance = "t3.small",
+        large_instance = "c7i-flex.large"
+    })
+    depends_on = [ aws_security_group.my_security_group ]
     key_name = aws_key_pair.my_key.key_name
     vpc_security_group_ids = [ aws_security_group.my_security_group.name ]
-    instance_type = var.aws_instance_type
+    instance_type = each.value
     ami = var.ec2_ami
     user_data = file("install_nginx.sh")
     root_block_device {
-      volume_size = var.aws_root_storage_size
+      volume_size = var.env=="prd" ? 10 : var.ec2_default_aws_root_storage_size
       volume_type = var.aws_root_storage_type
     }
     tags = {
-        Name = "tf-instance"
+        Name = each.key
     }
 }

@@ -2,7 +2,7 @@ variable "aws_instance_type" {
     default = "t3.micro"
     type = string
 }
-variable "aws_root_storage_size" {
+variable "ec2_default_aws_root_storage_size" {
     default = 8
     type = number
 }
@@ -17,4 +17,9 @@ variable "aws_root_storage_type" {
 variable "aws_instance_count" {
   default = 2
   type = number
+}
+
+variable "env" {
+  default = "prd"
+  type = string
 }
