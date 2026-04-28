@@ -66,3 +66,8 @@ resource "aws_instance" "my_instance" {
         Name = each.key
     }
 }
+
+# resource "aws_instance" "new_instance" {
+#   ami = "unknown"
+#   instance_type = "unknown"
+# }
