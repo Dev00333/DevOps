@@ -65,3 +65,8 @@ resource "aws_instance" "my_instance" {
         Name = "practice-instance"
     }
 }
+
+# resource "aws_instance" "my_instance" {
+#   ami = "unknown"
+#   instance_type = "unknown"
+# }

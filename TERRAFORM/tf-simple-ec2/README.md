@@ -15,3 +15,4 @@ this is a normal terraform file to create a new ec2 instance with following conf
     - tenency: default
 * file also run the commands given by user
 * file also produces an output that is ip, dns and private ip of instance
+* file also creates a backup in the s3 in the aws account attached to your cli in your terminal
