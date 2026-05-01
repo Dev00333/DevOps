@@ -1,0 +1,21 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: nginx-deployment
+  namespace: nginx
+spec:
+  replicas: 2
+  selector:             # this is a selector in the k8s this is useful to select the image with the lable we describe so that no other image is selected at time of pod replication
+    matchLabels:
+      app: nginx
+  template:             # after the selection is done we describe the pod configuration of the pod we will be creating this can be different form the image in the selector above
+    metadata:
+      name: nginx-dep-pod
+      labels:
+        app: nginx                # this must match the selector
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80

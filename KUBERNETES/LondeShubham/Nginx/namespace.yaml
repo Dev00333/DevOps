@@ -1,0 +1,6 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: nginx
+
+  # this is a manifest file and every file in kubernetes is a manifest file
