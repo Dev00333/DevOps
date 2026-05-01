@@ -1,9 +1,10 @@
 #!/bin/bash
 # this script only sets up k8s environment for ec2 or linux instances that have apt installed and have username as ubuntu
+set -euo pipefail
 sudo apt-get update && sudo apt-get full-upgrade -y
 sudo apt-get install docker.io docker-compose-v2 git -y
 sudo systemctl enable --now docker
-sudo usermod -aG docker ubuntu && newgrp docker
+sudo usermod -aG docker ubuntu
 sudo service docker restart
 [ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.31.0/kind-linux-amd64
 [ $(uname -m) = aarch64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.31.0/kind-linux-arm64
