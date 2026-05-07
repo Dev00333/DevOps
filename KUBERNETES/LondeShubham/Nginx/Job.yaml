@@ -1,0 +1,21 @@
+# a job is a task taht performs a specific task and stops its execution
+kind: Job
+apiVersion: batch/v1
+metadata:
+  name: nginx-job
+  namespace: nginx
+spec:
+  completions: 1 #  here the completions decide how many times the job will be completed on one pod
+  parallelism: 2 #  here the parallelism decides how many pods will run together in parallel
+  backoffLimit: 4 # here the backoff limit decides how many times the job will retry if it fails
+  template:
+    metadata:
+      name: nginx-job-pod
+      labels:
+        app: batch-task
+    spec:
+      containers:
+      - name: batch-containers
+        image: busybox:latest # busybox has a simple task to just run the task
+        command: ["sh", "-c", "echo this batch process completed && sleep 10"]
+      restartPolicy: OnFailure # since this is a batch job and needs only single execution so we dont start it

@@ -1,0 +1,35 @@
+# a task that we can schedule and only 
+kind: CronJob
+apiVersion: batch/v1
+metadata:
+  name: min-back
+  namespace: nginx
+spec:
+  schedule: '* * * * *' #  this is a cron command that tells the job to work every 2 min
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: min-back
+          labels:
+            app: min-back
+        spec:
+          containers:
+          - name: backup-container
+            image: busybox
+            command: ["sh", "-c", "echo backup started && mkdir -p /backups && mkdir /data && cp -r /demo-data /backup && echo backup completed"]
+            volumeMounts:
+              - name: data-volume
+                mountPath: /demo-data
+              - name: backup-volume
+                mountPath: /backup
+          restartPolicy: Never
+          volumes: 
+            - name: data-volume
+              hostPath:
+                path: /demo-data
+                type: DirectoryOrCreate
+            - name: backup-volume
+              hostPath:
+                path: /backup
+                type: DirectoryOrCreate
