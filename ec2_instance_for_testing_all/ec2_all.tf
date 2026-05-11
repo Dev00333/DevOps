@@ -3,11 +3,11 @@ resource aws_key_pair all {
     public_key = file("all.pub")
 }
 
-resource "aws_default_vpc" "default" {
+resource aws_default_vpc default {
     
 }
 
-resource "aws_security_group" "all_sg" {
+resource aws_security_group all_sg {
     name = "all_sg"
     description = "this security group is for a machine that is used to practice all the devops tools"
     vpc_id = aws_default_vpc.default.id
@@ -51,8 +51,8 @@ resource "aws_security_group" "all_sg" {
     }
 }
 
-resource "aws_instance" "ec2_all" {
-    depends_on = [aws_security_group.all_sg]
+resource aws_instance ec2_all {
+    depends_on = [ aws_security_group.all_sg,aws_key_pair.all ]
     key_name = aws_key_pair.all.key_name
     vpc_security_group_ids = [aws_security_group.all_sg.name]
     ami = var.ami_id
