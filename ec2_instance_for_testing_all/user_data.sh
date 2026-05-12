@@ -24,5 +24,7 @@ sudo -u ubuntu git config --global user.email "devangmshr@gmail.com"
 sudo -u ubuntu git config --global user.name "Devang Mishra"
 sudo -u ubuntu git clone https://github.com/Dev00333/DevOps /home/ubuntu/DevOps
 sudo chown -R ubuntu:ubuntu /home/ubuntu/DevOps
+cd /home/ubuntu
+ln -s /home/ubuntu/DevOps/KUBERNETES/LondeShubham k8s
 rm /home/ubuntu/kubectl /home/ubuntu/kubectl.sha256
 sudo reboot
