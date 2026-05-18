@@ -2,6 +2,7 @@
 
 kind create cluster --name=kind-cluster --config=/home/ubuntu/k8s/first.yaml
 cd /home/ubuntu/k8s/Nginx
+kubectl apply -f namespace.yaml
 kubectl apply -f pv.yaml
 kubectl apply -f pvc.yaml
 kubectl apply -f deployment.yaml
