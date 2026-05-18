@@ -28,5 +28,5 @@ cd /home/ubuntu
 ln -s /home/ubuntu/DevOps/KUBERNETES/LondeShubham k8s
 rm /home/ubuntu/kubectl /home/ubuntu/kubectl.sha256
 cd /home/ubuntu/k8s
-chmod +x setup.sh
+chmod 700 setup.sh
 sudo reboot
