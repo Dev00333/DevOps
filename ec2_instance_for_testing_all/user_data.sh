@@ -27,4 +27,6 @@ sudo chown -R ubuntu:ubuntu /home/ubuntu/DevOps
 cd /home/ubuntu
 ln -s /home/ubuntu/DevOps/KUBERNETES/LondeShubham k8s
 rm /home/ubuntu/kubectl /home/ubuntu/kubectl.sha256
+cd /home/ubuntu/k8s
+chmod +x setup.sh
 sudo reboot
