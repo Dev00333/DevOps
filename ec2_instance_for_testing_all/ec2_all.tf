@@ -35,13 +35,13 @@ resource aws_security_group all_sg {
         cidr_blocks = ["0.0.0.0/0"]
         description = "this pport allows the https traffic to move and it is unsecured to test the tools"
     }
-    # ingress {
-    #     from_port = 8080
-    #     to_port = 8080
-    #     protocol = "tcp"
-    #     cidr_blocks = ["0.0.0.0/0"]
-    #     description = "this port in this instance is opened for allowing the clusterIP to bind to it and it is unsecured to test the tools"
-    # }
+    ingress {
+        from_port = 8080
+        to_port = 8080
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+        description = "this port in this instance is opened for allowing the clusterIP to bind to it and it is unsecured to test the tools"
+    }
 
     ingress {
         from_port = 8000
