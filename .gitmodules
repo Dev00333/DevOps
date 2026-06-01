@@ -1,0 +1,3 @@
+[submodule "KUBERNETES/LondeShubham/projects/django-notes-app"]
+	path = KUBERNETES/LondeShubham/projects/django-notes-app
+	url = https://github.com/LondheShubham153/django-notes-app
