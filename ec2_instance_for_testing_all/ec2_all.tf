@@ -69,7 +69,7 @@ resource aws_security_group all_sg {
 resource aws_instance ec2_all {
     depends_on = [ aws_security_group.all_sg,aws_key_pair.all ]
     key_name = aws_key_pair.all.key_name
-    vpc_security_group_ids = [aws_security_group.all_sg.name]
+    vpc_security_group_ids = [aws_security_group.all_sg.id]
     ami = var.ami_id
     instance_type =var.aws_instance_type
     user_data = file("user_data.sh")
