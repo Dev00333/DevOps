@@ -3,16 +3,19 @@ apiVersion: apps/v1
 metadata:
   name: nginx-deployment
   namespace: nginx
+  labels:
+    app: nginx
+    environment: production
 spec:
   replicas: 2
-  selector:             # this is a selector in the k8s this is useful to select the image with the lable we describe so that no other image is selected at time of pod replication
+  selector:
     matchLabels:
       app: nginx
-  template:             # after the selection is done we describe the pod configuration of the pod we will be creating this can be different form the image in the selector above
+  template:
     metadata:
-      name: nginx-dep-pod
+      name: nginx-deployment-pod
       labels:
-        app: nginx                # this must match the selector
+        app: nginx
     spec:
       containers:
       - name: nginx
@@ -22,6 +25,25 @@ spec:
         volumeMounts:
         - mountPath: /var/www/html
           name: my-volume
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "256Mi"
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
       volumes:
         - name: my-volume
           persistentVolumeClaim:

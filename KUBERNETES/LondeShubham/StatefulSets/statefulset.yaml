@@ -1,8 +1,11 @@
 apiVersion: apps/v1
 kind: StatefulSet
+apiVersion: apps/v1
 metadata:
   name: mysql-statefulset
   namespace: mysql
+  labels:
+    app: mysql
 spec:
   serviceName: mysql-service
   replicas: 3
@@ -27,6 +30,25 @@ spec:
         volumeMounts:
         - name: mysql-data
           mountPath: /var/lib/mysql
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - echo "liveness probe"
+        readinessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - echo "readiness probe"
   volumeClaimTemplates:
   - metadata:
       name: mysql-data
